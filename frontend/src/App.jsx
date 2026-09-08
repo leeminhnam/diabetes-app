@@ -73,7 +73,7 @@ function App() {
     setError(null);
   };
 
-  // Gửi request POST đến Flask API
+  // Gửi request POST đến FastAPI
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -101,7 +101,7 @@ function App() {
       }
     } catch (err) {
       setError(
-        'Không thể kết nối đến Flask API (http://127.0.0.1:8000). Hãy đảm bảo bạn đã bấm chạy cell Flask trên Jupyter Notebook!'
+        'Không thể kết nối đến FastAPI (http://127.0.0.1:8000). Hãy đảm bảo bạn đã bấm chạy cell Flask trên Jupyter Notebook!'
       );
     } finally {
       setLoading(false);
