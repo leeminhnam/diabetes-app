@@ -1,4 +1,4 @@
-import pickle
+import joblib
 import json
 import os
 import pandas as pd
@@ -8,11 +8,9 @@ MODEL_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'ml_models'
 
 class DiabetesPredictor:
     def __init__(self):
-        with open(os.path.join(MODEL_DIR, 'best_diabetes_model.pkl'), 'rb') as f:
-            self.model = pickle.load(f)
-        with open(os.path.join(MODEL_DIR, 'scaler_diabetes.pkl'), 'rb') as f:
-            self.scaler = pickle.load(f)
-        with open(os.path.join(MODEL_DIR, 'model_columns.json'), 'r') as f:
+        self.model = joblib.load(os.path.join(MODEL_DIR, 'best_diabetes_model.pkl'))
+        self.scaler = joblib.load(os.path.join(MODEL_DIR, 'scaler_diabetes.pkl'))
+        with open(os.path.join(MODEL_DIR, 'model_columns.json'), 'r', encoding='utf-8') as f:
             self.model_columns = json.load(f)
 
     def predict(self, data: PredictRequest) -> PredictResponse:
@@ -29,13 +27,12 @@ class DiabetesPredictor:
                     df[col] = 0
             df = df[self.model_columns]
 
-            # Scale numerical features
-            num_cols = ['age', 'bmi', 'HbA1c_level', 'blood_glucose_level']
-            df[num_cols] = self.scaler.transform(df[num_cols])
+            # Scale ALL features (because scaler was fit on all columns)
+            scaled_array = self.scaler.transform(df)
 
-            # Predict
-            prediction = int(self.model.predict(df)[0])
-            prob = self.model.predict_proba(df)[0][1]
+            # Predict using the scaled array
+            prediction = int(self.model.predict(scaled_array)[0])
+            prob = self.model.predict_proba(scaled_array)[0][1]
 
             diagnosis = "Nguy cơ cao" if prediction == 1 else "Bình thường"
 

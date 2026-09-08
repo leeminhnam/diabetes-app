@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 class PredictRequest(BaseModel):
     gender: str
@@ -11,6 +11,8 @@ class PredictRequest(BaseModel):
     blood_glucose_level: float
 
 class PredictResponse(BaseModel):
+    model_config = ConfigDict(protected_namespaces=())
+    
     success: bool
     prediction: int
     risk_percentage: float
