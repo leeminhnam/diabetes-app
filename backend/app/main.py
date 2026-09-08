@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .api import router
-from .ml_service import get_predictor
+from .xgboost.service import get_xgboost_service
+from .mlp.service import get_mlp_service
 
 app = FastAPI(title="Diabetes Prediction API")
 
@@ -15,6 +16,9 @@ app.add_middleware(
 
 @app.on_event("startup")
 def startup_event():
-    get_predictor() # Load models
+    # Load models into memory on startup
+    get_xgboost_service()
+    get_mlp_service()
 
 app.include_router(router)
+

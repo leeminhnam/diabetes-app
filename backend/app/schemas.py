@@ -9,6 +9,7 @@ class PredictRequest(BaseModel):
     bmi: float
     HbA1c_level: float
     blood_glucose_level: float
+    model_type: str = "xgboost"
 
 class PredictResponse(BaseModel):
     model_config = ConfigDict(protected_namespaces=())

@@ -1,1 +1,4 @@
 .ipynb_checkpoints
+.superpowers
+docs
+__pycache__

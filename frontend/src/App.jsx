@@ -12,6 +12,7 @@ function App() {
     bmi: 24.5,
     HbA1c_level: 5.7,
     blood_glucose_level: 110,
+    model_type: 'xgboost',
   });
 
   // State phụ trợ giúp tính BMI tự động nếu người dùng không nhớ BMI
@@ -28,7 +29,7 @@ function App() {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: ['gender', 'smoking_history'].includes(name)
+      [name]: ['gender', 'smoking_history', 'model_type'].includes(name)
         ? value
         : parseFloat(value) || 0,
     }));
@@ -150,6 +151,17 @@ function App() {
               <h3 className="section-title">
                 <span className="step-num">1</span> Thông tin cơ bản
               </h3>
+
+              <div className="grid-2-col" style={{marginBottom: "15px"}}>
+                <div className="input-group">
+                  <label>Mô hình AI dự đoán</label>
+                  <select name="model_type" value={formData.model_type} onChange={handleChange}>
+                    <option value="xgboost">Gradient Boosting (XGBoost)</option>
+                    <option value="mlp">Deep Learning (PyTorch MLP)</option>
+                  </select>
+                </div>
+              </div>
+
               <div className="grid-2-col">
                 <div className="input-group">
                   <label>Giới tính</label>
