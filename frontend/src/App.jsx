@@ -101,7 +101,7 @@ function App() {
       }
     } catch (err) {
       setError(
-        'Không thể kết nối đến FastAPI (http://127.0.0.1:8000). Hãy đảm bảo bạn đã bấm chạy cell Flask trên Jupyter Notebook!'
+        'Không thể kết nối đến FastAPI (http://127.0.0.1:8000). Hãy đảm bảo server FastAPI đang chạy ở port 8000!'
       );
     } finally {
       setLoading(false);
