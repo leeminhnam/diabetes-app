@@ -82,7 +82,9 @@ function App() {
     setResult(null);
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/predict', {
+      // Sử dụng đường dẫn tương đối khi build trên Vercel (Production) và localhost khi Dev
+      const apiUrl = import.meta.env.PROD ? '/predict' : 'http://127.0.0.1:8000/predict';
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -102,7 +104,7 @@ function App() {
       }
     } catch (err) {
       setError(
-        'Không thể kết nối đến FastAPI (http://127.0.0.1:8000). Hãy đảm bảo server FastAPI đang chạy ở port 8000!'
+        'Không thể kết nối đến Server FastAPI. Nếu đang chạy local, hãy đảm bảo server đang bật ở port 8000!'
       );
     } finally {
       setLoading(false);
