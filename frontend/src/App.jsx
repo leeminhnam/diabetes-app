@@ -81,7 +81,7 @@ function App() {
     setResult(null);
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/predict', {
+      const response = await fetch('http://127.0.0.1:8000/predict', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -101,7 +101,7 @@ function App() {
       }
     } catch (err) {
       setError(
-        'Không thể kết nối đến Flask API (http://127.0.0.1:5000). Hãy đảm bảo bạn đã bấm chạy cell Flask trên Jupyter Notebook!'
+        'Không thể kết nối đến Flask API (http://127.0.0.1:8000). Hãy đảm bảo bạn đã bấm chạy cell Flask trên Jupyter Notebook!'
       );
     } finally {
       setLoading(false);
