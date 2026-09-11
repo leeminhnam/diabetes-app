@@ -21,7 +21,7 @@ set_seed(42)
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 # backend/ is 2 levels up
 BASE_DIR = os.path.dirname(os.path.dirname(CURRENT_DIR))
-DATA_PATH = os.path.join(BASE_DIR, "diabetes.csv")
+DATA_PATH = os.path.join(BASE_DIR, "DATA", "diabetes.csv")
 
 # 1. Load data
 data = pd.read_csv(DATA_PATH)

@@ -29,7 +29,8 @@ diabetes-app/
 │   │       ├── service.py
 │   │       ├── model.py      
 │   │       └── train_mlp_13.py # Kịch bản huấn luyện mô hình MLP
-│   ├── diabetes.csv          # Dữ liệu gốc
+│   ├── DATA/                 # Thư mục chứa dữ liệu
+│   │   └── diabetes.csv      # Dữ liệu gốc
 │   └── requirements.txt      # Danh sách thư viện Python
 └── frontend/                 # React (Vite) Frontend
     ├── src/
